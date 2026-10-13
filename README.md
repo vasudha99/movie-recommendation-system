@@ -4,7 +4,7 @@
 
 An end-to-end machine learning project exploring how neural networks can predict user preferences and support personalised movie recommendations.
 
-The system uses a Multi-Layer Perceptron (MLP) with user and movie embeddings to learn relationships between users, movies and historical ratings. It combines collaborative filtering techniques with movie metadata to estimate user ratings and generate recommendations based on individual preferences.
+The system uses a Multi-Layer Perceptron (MLP) with user and movie embeddings to learn relationships between users, movies and historical ratings. It uses collaborative filtering through learned user and movie embeddings to estimate ratings and generate recommendations. Movie metadata is used only for optional title lookup through the correct MovieLens-to-TMDb mapping.
 
 ## Project Overview
 
@@ -35,7 +35,8 @@ This project investigates how deep learning can be applied to movie recommendati
 The project uses data from [The Movies Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset), including:
 
 - **ratings_small.csv:** Historical user ratings for movies.
-- **movies_metadata.csv:** Movie information and associated metadata.
+- **movies_metadata.csv (optional):** Movie titles and metadata for display.
+- **links_small.csv (optional):** Maps MovieLens movie IDs to TMDb movie IDs; required when using movie metadata.
 
 The data supports the analysis of user–movie interactions and the preparation of features for neural network training.
 
@@ -51,7 +52,7 @@ The workflow begins with exploring the datasets, handling missing values, prepar
 
 User and movie identifiers are represented through learned embeddings, allowing the model to capture patterns in historical rating behaviour.
 
-Movie metadata provides additional information for the prediction process.
+Movie metadata is not used as a model feature in the corrected notebook. Optional title lookup uses `links_small.csv` to avoid mismatched movie IDs.
 
 ### 3. Neural Network Development
 
@@ -72,14 +73,14 @@ The notebook explores a recommendation function that combines predicted ratings 
 
 ## Model Performance
 
-The original notebook recorded the following results:
+The **archived original academic notebook** recorded the following results. These are **not metrics for the corrected notebook**, which must be rerun:
 
 | Evaluation Metric | Recorded Result |
 |---|---|
 | Test Mean Absolute Error | **0.7344** |
 | Test Mean Squared Error | **0.8811** |
 
-These results are from the original academic experiment and have not yet been reproduced using the cleaned repository version.
+The corrected notebook calculates fresh metrics when run and compares the MLP with a mean-rating baseline. No new accuracy result is claimed until that run is completed.
 
 ## Key Skills Demonstrated
 
@@ -99,7 +100,11 @@ movie-recommendation-system/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
+├── DATA_VALIDATION.md
+├── archive/
+│   └── movie_recommendation_original.ipynb
 └── data/
+    └── .gitkeep
 ```
 
 ## Getting Started
@@ -114,12 +119,12 @@ cd movie-recommendation-system
 **2. Install the required libraries**
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 **3. Download the datasets**
 
-Download `ratings_small.csv` and `movies_metadata.csv` from the dataset source and place them inside the `data/` directory.
+Download `ratings_small.csv` from the dataset source and place it in `data/`. To display movie titles, also download `links_small.csv` and `movies_metadata.csv` into the same folder.
 
 **4. Run the notebook**
 
@@ -137,6 +142,6 @@ Potential extensions include:
 
 ## Project Status
 
-Academic machine learning project. The repository contains a cleaned notebook prepared for further reproducibility testing and refinement.
+Academic machine learning project with a corrected data pipeline and preserved original notebook. The revised notebook has **not yet been rerun end to end with TensorFlow**; evaluation results remain pending.
 
 ---
