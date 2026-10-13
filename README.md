@@ -1,147 +1,67 @@
-# Movie Recommendation System Using Deep Learning
+# Intelligent Movie Recommendation System Using Multi-Layer Perceptron (MLP)
 
-**Personalised Movie Recommendations | Neural Networks | Predictive Modelling**
+**Python | TensorFlow/Keras | Deep Learning | Recommendation Systems**
 
-An end-to-end machine learning project exploring how neural networks can predict user preferences and support personalised movie recommendations.
+This project develops an intelligent movie recommendation system that predicts user ratings and generates personalised movie suggestions. It combines user–movie interactions, movie metadata and a Multi-Layer Perceptron (MLP) with user and movie embedding layers.
 
-The system uses a Multi-Layer Perceptron (MLP) with user and movie embeddings to learn relationships between users, movies and historical ratings. It uses collaborative filtering through learned user and movie embeddings to estimate ratings and generate recommendations. Movie metadata is used only for optional title lookup through the correct MovieLens-to-TMDb mapping.
+The project was developed as part of the Artificial Intelligence (CP70069E) module at the University of West London.
 
 ## Project Overview
 
-Recommendation systems help users discover relevant content by analysing historical interactions and identifying patterns in preferences.
+The recommendation system uses historical ratings and movie attributes to understand user preferences. For existing users, it generates personalised suggestions based on predicted ratings and genre preferences. For new users, it provides recommendations using highly rated and popular movies.
 
-This project investigates how deep learning can be applied to movie recommendation by combining user–movie interaction data with additional movie information.
+## Technologies
 
-**Project objectives:**
-- Explore and preprocess movie ratings and metadata.
-- Identify patterns in user preferences and movie characteristics.
-- Develop a neural network-based rating prediction model.
-- Evaluate predictive performance using regression metrics.
-- Explore personalised recommendations using predicted ratings and genre preferences.
-
-## Technology Stack
-
-| Category | Technologies |
-|---|---|
-| Programming | Python |
-| Deep Learning | TensorFlow, Keras |
-| Data Analysis | Pandas, NumPy |
-| Machine Learning | Scikit-learn |
-| Visualisation | Matplotlib, Seaborn |
-| Development | Jupyter Notebook |
+- **Python** for implementation
+- **TensorFlow and Keras** for the neural network
+- **Pandas and NumPy** for data preparation
+- **Scikit-learn** for encoding, scaling, data splitting and evaluation
+- **Matplotlib and Seaborn** for exploratory analysis and training visualisations
+- **Google Colab / Jupyter Notebook** for development
 
 ## Dataset
 
-The project uses data from [The Movies Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset), including:
+Source: [The Movies Dataset on Kaggle](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset)
 
-- **ratings_small.csv:** Historical user ratings for movies.
-- **movies_metadata.csv (optional):** Movie titles and metadata for display.
-- **links_small.csv (optional):** Maps MovieLens movie IDs to TMDb movie IDs; required when using movie metadata.
-
-The data supports the analysis of user–movie interactions and the preparation of features for neural network training.
-
-Dataset files are not included in this repository. They can be downloaded from the original source.
+The original project uses:
+- `ratings_small.csv`: User IDs, movie IDs and ratings
+- `movies_metadata.csv`: Movie titles, genres, vote averages, vote counts, budgets, revenues and runtimes
 
 ## Methodology
 
-### 1. Data Preparation
+1. **Data preprocessing:** Parse genres, handle missing values, convert data types and prepare ratings and metadata.
+2. **Exploratory data analysis:** Explore rating distributions, user activity and movie popularity.
+3. **Feature engineering:** Encode user/movie IDs and genres, and scale numerical movie attributes.
+4. **MLP architecture:** Use 50-dimensional user and movie embeddings, followed by dense layers of 128, 64 and 32 neurons with ReLU activations.
+5. **Model training:** Train with Adam optimisation, mean squared error loss, regularisation and early stopping.
+6. **Evaluation:** Assess predicted ratings using MAE and MSE, with training and validation visualisations.
+7. **Recommendations:** Generate recommendations for existing users and popularity-based suggestions for new users.
 
-The workflow begins with exploring the datasets, handling missing values, preparing relevant features and transforming categorical and numerical information into a suitable format for model training.
+## Results
 
-### 2. Feature Engineering
+The results reported in the original academic project are:
 
-User and movie identifiers are represented through learned embeddings, allowing the model to capture patterns in historical rating behaviour.
+| Metric | Result |
+|---|---:|
+| Test Mean Absolute Error (MAE) | **0.7344** |
+| Test Mean Squared Error (MSE) | **0.8811** |
 
-Movie metadata is not used as a model feature in the corrected notebook. Optional title lookup uses `links_small.csv` to avoid mismatched movie IDs.
+The academic report also includes rating-distribution graphs, training and validation curves, and examples of recommendations for existing and new users.
 
-### 3. Neural Network Development
+## Project Files
 
-A Multi-Layer Perceptron is implemented using TensorFlow/Keras to estimate movie ratings.
+- [Movie recommendation notebook](movie_recommendation.ipynb): Original project code and explanations
+- [Original notebook archive](archive/movie_recommendation_original.ipynb): Preserved original notebook
+- [Requirements](requirements.txt): Python dependencies
+- `data/`: Location for downloaded datasets (dataset files are not stored in this repository)
 
-The model learns from user–movie interactions and associated features to produce predicted ratings.
+## Running the Project
 
-### 4. Model Evaluation
+1. Download `ratings_small.csv` and `movies_metadata.csv` from the Kaggle dataset above.
+2. Open the notebook in Google Colab.
+3. Use the dataset paths configured in the notebook for your Colab environment.
+4. Run the cells in order to explore the data, train the MLP and generate recommendations.
 
-Predictive performance is assessed using:
+## Skills Demonstrated
 
-- **Mean Absolute Error (MAE):** Measures the average absolute difference between predicted and actual ratings.
-- **Mean Squared Error (MSE):** Measures the average squared prediction error, placing greater emphasis on larger errors.
-
-### 5. Recommendation Generation
-
-The notebook explores a recommendation function that combines predicted ratings with genre preferences to identify potentially relevant movies for a user.
-
-## Model Performance
-
-The **archived original academic notebook** recorded the following results. These are **not metrics for the corrected notebook**, which must be rerun:
-
-| Evaluation Metric | Recorded Result |
-|---|---|
-| Test Mean Absolute Error | **0.7344** |
-| Test Mean Squared Error | **0.8811** |
-
-The corrected notebook calculates fresh metrics when run and compares the MLP with a mean-rating baseline. No new accuracy result is claimed until that run is completed.
-
-## Key Skills Demonstrated
-
-- Exploratory data analysis and data preprocessing
-- Feature engineering and categorical encoding
-- Neural network architecture and embedding layers
-- Deep learning model training using TensorFlow/Keras
-- Regression-based model evaluation
-- Recommendation system development
-- Translating machine learning concepts into a practical application
-
-## Repository Structure
-
-```text
-movie-recommendation-system/
-├── movie_recommendation.ipynb
-├── README.md
-├── requirements.txt
-├── .gitignore
-├── DATA_VALIDATION.md
-├── archive/
-│   └── movie_recommendation_original.ipynb
-└── data/
-    └── .gitkeep
-```
-
-## Getting Started
-
-**1. Clone the repository**
-
-```bash
-git clone https://github.com/vasudha99/movie-recommendation-system.git
-cd movie-recommendation-system
-```
-
-**2. Install the required libraries**
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-**3. Download the datasets**
-
-Download `ratings_small.csv` from the dataset source and place it in `data/`. To display movie titles, also download `links_small.csv` and `movies_metadata.csv` into the same folder.
-
-**4. Run the notebook**
-
-Open `movie_recommendation.ipynb` using Jupyter Notebook or VS Code and execute the cells sequentially.
-
-## Future Improvements
-
-Potential extensions include:
-
-- Strengthening the train/test preprocessing pipeline to prevent data leakage.
-- Expanding candidate generation to recommend movies beyond observed user interactions.
-- Comparing neural network predictions against simpler recommendation baselines.
-- Adding ranking-based evaluation metrics.
-- Developing an interactive recommendation interface.
-
-## Project Status
-
-Academic machine learning project with a corrected data pipeline and preserved original notebook. The revised notebook has **not yet been rerun end to end with TensorFlow**; evaluation results remain pending.
-
----
+Deep learning, neural network modelling, recommendation systems, embeddings, exploratory data analysis, feature engineering, model evaluation and Python data science.
